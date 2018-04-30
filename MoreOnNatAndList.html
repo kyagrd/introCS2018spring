@@ -736,9 +736,13 @@ font-weight: bold;
 <li>일진수 뺄셈을 계산하는 <code>minus</code>를 정의하라. 자연수에는 음수가 없으므로 첫 번째 인자보다 두 번째 인자가 더 큰 경우는 Z으로 처리한다. 예컨대 <code>minus two three</code>의 계산결과는 Z가 된다.</li>
 <li><code>plusList</code>와 비슷한 연산을 이진트리에 하는 <code>plusTree</code> 함수를 정의해 보라.<br>
 <code>plusTree</code>
-<img style='display:inline' src='http://i68.tinypic.com/20f2hwz.png' width='200'>
-<img style='display:inline' src='http://i64.tinypic.com/f4ms0p.png' width='200'>
-= <img style='display:inline' src='http://i68.tinypic.com/t9wmzd.png' width='200'></li>
+<img style='display:inline' src='https://kyagrd.github.io/introCS2018spring/img/t1.png' width='200'>
+<img style='display:inline' src='https://kyagrd.github.io/introCS2018spring/img/t2.png' width='200'>
+= <img style='display:inline' src='https://kyagrd.github.io/introCS2018spring/img/t3.png' width='200'></li>
+<li>좌우를 뒤집은 이진트리를 돌려주는 <code>mirrorTree</code> 함수를 정의해 보라<br>
+<code>mirrorTree</code>
+<img style='display:inline' src='https://kyagrd.github.io/introCS2018spring/img/t4.png' width='200'>
+= <img style='display:inline' src='https://kyagrd.github.io/introCS2018spring/img/t5.png' width='200'></li>
 </ol>
 
 </div>
@@ -970,8 +974,19 @@ font-weight: bold;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-haskell"><pre><span class="kr">data</span> <span class="kt">Tree</span> <span class="ow">=</span> <span class="kt">Null</span> <span class="o">|</span> <span class="kt">Node</span> <span class="kt">Int</span> <span class="kt">Tree</span> <span class="kt">Tree</span>  <span class="kr">deriving</span> <span class="kt">Show</span>
+</pre></div>
 
-<span class="nf">plusTree</span> <span class="ow">::</span> <span class="kt">Tree</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">plusTree</span> <span class="ow">::</span> <span class="kt">Tree</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span>
 <span class="c1">-- 여기에 plusTree 정의하기</span>
 </pre></div>
 
@@ -1068,6 +1083,116 @@ color: red;
 font-weight: bold;
 }
 </style><span class='err-msg'>The type signature for `plusTree' lacks an accompanying binding</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">mirrorTree</span> <span class="ow">::</span> <span class="kt">Tree</span> <span class="ow">-&gt;</span> <span class="kt">Tree</span>
+<span class="c1">-- 여기에 mirrorTree 정의하기</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<style>/* Styles used for the Hoogle display in the pager */
+.hoogle-doc {
+display: block;
+padding-bottom: 1.3em;
+padding-left: 0.4em;
+}
+.hoogle-code {
+display: block;
+font-family: monospace;
+white-space: pre;
+}
+.hoogle-text {
+display: block;
+}
+.hoogle-name {
+color: green;
+font-weight: bold;
+}
+.hoogle-head {
+font-weight: bold;
+}
+.hoogle-sub {
+display: block;
+margin-left: 0.4em;
+}
+.hoogle-package {
+font-weight: bold;
+font-style: italic;
+}
+.hoogle-module {
+font-weight: bold;
+}
+.hoogle-class {
+font-weight: bold;
+}
+.get-type {
+color: green;
+font-weight: bold;
+font-family: monospace;
+display: block;
+white-space: pre-wrap;
+}
+.show-type {
+color: green;
+font-weight: bold;
+font-family: monospace;
+margin-left: 1em;
+}
+.mono {
+font-family: monospace;
+display: block;
+}
+.err-msg {
+color: red;
+font-style: italic;
+font-family: monospace;
+white-space: pre;
+display: block;
+}
+#unshowable {
+color: red;
+font-weight: bold;
+}
+.err-msg.in.collapse {
+padding-top: 0.7em;
+}
+.highlight-code {
+white-space: pre;
+font-family: monospace;
+}
+.suggestion-warning { 
+font-weight: bold;
+color: rgb(200, 130, 0);
+}
+.suggestion-error { 
+font-weight: bold;
+color: red;
+}
+.suggestion-name {
+font-weight: bold;
+}
+</style><span class='err-msg'>The type signature for `mirrorTree' lacks an accompanying binding</span>
 </div>
 
 </div>
