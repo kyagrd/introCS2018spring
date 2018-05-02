@@ -835,7 +835,7 @@ font-weight: bold;
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>위 오류 메시지는 대략 then 다음에 오는 <code>"hello"</code>가 문자열 타입(<code>String</code>)이므로 else 다음에 오는 식도 문자열이어야 하는데 <code>(\x y -&gt; y)</code>는 인자를 두 개 받는 함수 타입(<code>t0 -&gt; t1 -&gt; t2</code>)이라서 문자열 타입(<code>String</code>)과 맞아떨어지지 않는다는 뜻이다.</p>
+<p>위 오류 메시지는 대략 then 다음에 오는 <code>"hello"</code>가 문자열 타입(<code>String</code>)이므로 else 다음에 오는 식도 문자열이어야 하는데 <code>(\x y -&gt; y)</code>는 인자를 두 개 받는 함수 타입(<code>t0 -&gt; t1 -&gt; t1</code>)이라서 문자열 타입(<code>String</code>)과 맞아떨어지지 않는다는 뜻이다.</p>
 
 </div>
 </div>
@@ -2755,6 +2755,26 @@ font-weight: bold;
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>위의 실행 예 중에서 <code>nat2int (S (S (S Z)))</code>의 계산과정을 수식을 전개하듯 다음과 같이 손으로 풀어볼 수 있다.</p>
+
+<pre><code>  nat2int (S (S (S Z)))
+= 1 + nat2int (S (S Z))
+= 1 + (1 + nat2int (S Z))
+= 1 + (1 + (1 + nat2int Z))
+= 1 + (1 + (1 + 0))
+= 1 + (1 + 1)
+= 1 + 2
+= 3</code></pre>
+<p>우리들이 초등학교나 중학교 산수/수학 시간에 배운 등식을 바탕으로 수식 전개하는 익숙한 방법대로 프로그램의 실행에 대해 생각해 볼 수 있는 것이 함수형 프로그래밍의 특징이다. (어느 변수의 메모리의 내용을 변경시키는지 이런 기계중심의 사고방식이 아니라)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#47532;&#49828;&#53944;-(&#51068;&#51652;&#53944;&#47532;,-&#54620;&#44040;&#47000;&#45208;&#47924;,-unary-tree&#47196;-&#48380;-&#49688;&#46020;-&#51080;&#51020;)">&#47532;&#49828;&#53944; (&#51068;&#51652;&#53944;&#47532;, &#54620;&#44040;&#47000;&#45208;&#47924;, unary tree&#47196; &#48380; &#49688;&#46020; &#51080;&#51020;)<a class="anchor-link" href="#&#47532;&#49828;&#53944;-(&#51068;&#51652;&#53944;&#47532;,-&#54620;&#44040;&#47000;&#45208;&#47924;,-unary-tree&#47196;-&#48380;-&#49688;&#46020;-&#51080;&#51020;)">&#182;</a></h2>
 </div>
 </div>
@@ -3385,7 +3405,7 @@ font-weight: bold;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>이진트리의 높이를 구하는 <code>height</code> 함수를 작성해 보자.
-귀납기초(induction base) 측 <code>Null</code>의 높이는 0이다. 귀납단계(inductive step)인 <code>Node n t1 t2</code>를 처리하기 위해서는 두 개의 귀납가정인 <code>height t1</code>과 <code>height t2</code> 중에 더 큰 값, 즉 두 <code>t1</code>과 <code>t2</code> 두 부분나무 중에 더 높은 높이값에 1을 더하면 전체 이진트리의 높이를 구할 수 있게 된다.<br>
+귀납기초(induction base) 측 <code>Null</code>의 높이는 0이다. 귀납단계(inductive step)인 <code>Node n t1 t2</code>를 처리하기 위해서는 두 개의 귀납가정인 <code>height t1</code>과 <code>height t2</code> 중에 더 큰 값, 즉 <code>t1</code>과 <code>t2</code> 두 부분나무 중에 더 높은 높이값에 1을 더하면 전체 이진트리의 높이를 구할 수 있게 된다.<br>
 두 부분트리의 높이 중 더 큰 것을 선택하기 위해 <code>max</code>라는 표준라이브러리 함수를 사용하였다.</p>
 
 </div>
