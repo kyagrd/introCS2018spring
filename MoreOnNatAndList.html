@@ -204,12 +204,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-haskell"><pre><span class="nf">plus</span> <span class="ow">::</span> <span class="kt">Nat</span> <span class="ow">-&gt;</span> <span class="kt">Nat</span> <span class="ow">-&gt;</span> <span class="kt">Nat</span>
-<span class="nf">plus</span> <span class="kt">Z</span>     <span class="n">m</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">plus</span> <span class="p">(</span><span class="kt">S</span> <span class="n">n</span><span class="p">)</span> <span class="n">m</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- inductive step</span>
+<div class=" highlight hl-haskell"><pre><span class="c1">-- 일진수 덧셈</span>
+<span class="nf">plus</span> <span class="ow">::</span> <span class="kt">Nat</span> <span class="ow">-&gt;</span> <span class="kt">Nat</span> <span class="ow">-&gt;</span> <span class="kt">Nat</span>
+<span class="nf">plus</span> <span class="kt">Z</span>     <span class="n">m</span> <span class="ow">=</span> <span class="n">m</span>            <span class="c1">-- induction base</span>
+<span class="nf">plus</span> <span class="p">(</span><span class="kt">S</span> <span class="n">n</span><span class="p">)</span> <span class="n">m</span> <span class="ow">=</span> <span class="kt">S</span> <span class="p">(</span><span class="n">plus</span> <span class="n">n</span> <span class="n">m</span><span class="p">)</span> <span class="c1">-- inductive step</span>
 </pre></div>
 
 </div>
@@ -219,12 +220,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-haskell"><pre><span class="nf">append</span> <span class="ow">::</span> <span class="kt">List</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="ow">-&gt;</span> <span class="kt">List</span>
-<span class="nf">append</span> <span class="kt">Nil</span>         <span class="n">ys</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">append</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">ys</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- inductive step</span>
+<div class=" highlight hl-haskell"><pre><span class="c1">-- 리스트 두 개를 이어붙이는 함수</span>
+<span class="nf">append</span> <span class="ow">::</span> <span class="kt">List</span> <span class="ow">-&gt;</span> <span class="kt">List</span> <span class="ow">-&gt;</span> <span class="kt">List</span>
+<span class="nf">append</span> <span class="kt">Nil</span>         <span class="n">ys</span> <span class="ow">=</span> <span class="n">ys</span> <span class="c1">-- induction base</span>
+<span class="nf">append</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">ys</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="n">x</span> <span class="p">(</span><span class="n">append</span> <span class="n">xs</span> <span class="n">ys</span><span class="p">)</span> <span class="c1">-- inductive step</span>
 </pre></div>
 
 </div>
@@ -234,14 +236,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-haskell"><pre><span class="nf">two</span>   <span class="ow">=</span> <span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="kt">Z</span><span class="p">)</span>
 <span class="nf">three</span> <span class="ow">=</span> <span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="p">(</span><span class="kt">S</span> <span class="kt">Z</span><span class="p">))</span>
 
-<span class="nf">plus</span> <span class="kt">Z</span> <span class="n">three</span>
-<span class="nf">plus</span> <span class="n">two</span> <span class="n">three</span>
+<span class="nf">plus</span> <span class="kt">Z</span> <span class="n">three</span>    <span class="c1">-- 결과가 3에 해당하는 일진수</span>
+<span class="nf">plus</span> <span class="n">two</span> <span class="n">three</span>  <span class="c1">-- 결과가 5에 해당하는 일진수</span>
 </pre></div>
 
 </div>
@@ -254,89 +256,18 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea ">
-<style>/* Styles used for the Hoogle display in the pager */
-.hoogle-doc {
-display: block;
-padding-bottom: 1.3em;
-padding-left: 0.4em;
-}
-.hoogle-code {
-display: block;
-font-family: monospace;
-white-space: pre;
-}
-.hoogle-text {
-display: block;
-}
-.hoogle-name {
-color: green;
-font-weight: bold;
-}
-.hoogle-head {
-font-weight: bold;
-}
-.hoogle-sub {
-display: block;
-margin-left: 0.4em;
-}
-.hoogle-package {
-font-weight: bold;
-font-style: italic;
-}
-.hoogle-module {
-font-weight: bold;
-}
-.hoogle-class {
-font-weight: bold;
-}
-.get-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-display: block;
-white-space: pre-wrap;
-}
-.show-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-margin-left: 1em;
-}
-.mono {
-font-family: monospace;
-display: block;
-}
-.err-msg {
-color: red;
-font-style: italic;
-font-family: monospace;
-white-space: pre;
-display: block;
-}
-#unshowable {
-color: red;
-font-weight: bold;
-}
-.err-msg.in.collapse {
-padding-top: 0.7em;
-}
-.highlight-code {
-white-space: pre;
-font-family: monospace;
-}
-.suggestion-warning { 
-font-weight: bold;
-color: rgb(200, 130, 0);
-}
-.suggestion-error { 
-font-weight: bold;
-color: red;
-}
-.suggestion-name {
-font-weight: bold;
-}
-</style><span class='err-msg'>Prelude.undefined</span>
+
+<div class="output_text output_subarea ">
+<pre>S (S (S Z))</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>S (S (S (S (S Z))))</pre>
 </div>
 
 </div>
@@ -347,14 +278,14 @@ font-weight: bold;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-haskell"><pre><span class="nf">list1</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="mi">1</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">2</span> <span class="kt">Nil</span><span class="p">)</span>
 <span class="nf">list2</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="mi">3</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">4</span> <span class="p">(</span><span class="kt">Cons</span> <span class="mi">5</span> <span class="kt">Nil</span><span class="p">))</span>
 
-<span class="nf">append</span> <span class="kt">Nil</span> <span class="n">list2</span>
-<span class="nf">append</span> <span class="n">list1</span> <span class="n">list2</span>
+<span class="nf">append</span> <span class="kt">Nil</span> <span class="n">list2</span>    <span class="c1">-- 결과가 3,4,5 가 들어있는 리스트</span>
+<span class="nf">append</span> <span class="n">list1</span> <span class="n">list2</span>  <span class="c1">-- 결과가 1,2,3,4,5 가 들어있는 리스트</span>
 </pre></div>
 
 </div>
@@ -367,89 +298,18 @@ font-weight: bold;
 
 <div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea ">
-<style>/* Styles used for the Hoogle display in the pager */
-.hoogle-doc {
-display: block;
-padding-bottom: 1.3em;
-padding-left: 0.4em;
-}
-.hoogle-code {
-display: block;
-font-family: monospace;
-white-space: pre;
-}
-.hoogle-text {
-display: block;
-}
-.hoogle-name {
-color: green;
-font-weight: bold;
-}
-.hoogle-head {
-font-weight: bold;
-}
-.hoogle-sub {
-display: block;
-margin-left: 0.4em;
-}
-.hoogle-package {
-font-weight: bold;
-font-style: italic;
-}
-.hoogle-module {
-font-weight: bold;
-}
-.hoogle-class {
-font-weight: bold;
-}
-.get-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-display: block;
-white-space: pre-wrap;
-}
-.show-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-margin-left: 1em;
-}
-.mono {
-font-family: monospace;
-display: block;
-}
-.err-msg {
-color: red;
-font-style: italic;
-font-family: monospace;
-white-space: pre;
-display: block;
-}
-#unshowable {
-color: red;
-font-weight: bold;
-}
-.err-msg.in.collapse {
-padding-top: 0.7em;
-}
-.highlight-code {
-white-space: pre;
-font-family: monospace;
-}
-.suggestion-warning { 
-font-weight: bold;
-color: rgb(200, 130, 0);
-}
-.suggestion-error { 
-font-weight: bold;
-color: red;
-}
-.suggestion-name {
-font-weight: bold;
-}
-</style><span class='err-msg'>Prelude.undefined</span>
+
+<div class="output_text output_subarea ">
+<pre>Cons 3 (Cons 4 (Cons 5 Nil))</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>Cons 1 (Cons 2 (Cons 3 (Cons 4 (Cons 5 Nil))))</pre>
 </div>
 
 </div>
@@ -471,12 +331,13 @@ font-weight: bold;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-haskell"><pre><span class="nf">minNat</span> <span class="kt">Z</span>     <span class="n">m</span>     <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">minNat</span> <span class="n">n</span>     <span class="kt">Z</span>     <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">minNat</span> <span class="p">(</span><span class="kt">S</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="kt">S</span> <span class="n">m</span><span class="p">)</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- inductive step</span>
+<div class=" highlight hl-haskell"><pre><span class="c1">-- 두 일진수 중에 작은 값을 돌려주는 함수</span>
+<span class="nf">minNat</span> <span class="kt">Z</span>     <span class="n">m</span>     <span class="ow">=</span> <span class="kt">Z</span> <span class="c1">-- induction base</span>
+<span class="nf">minNat</span> <span class="n">n</span>     <span class="kt">Z</span>     <span class="ow">=</span> <span class="kt">Z</span> <span class="c1">-- induction base</span>
+<span class="nf">minNat</span> <span class="p">(</span><span class="kt">S</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="kt">S</span> <span class="n">m</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">S</span> <span class="p">(</span><span class="n">minNat</span> <span class="n">n</span> <span class="n">m</span><span class="p">)</span> <span class="c1">-- inductive step</span>
 </pre></div>
 
 </div>
@@ -486,7 +347,7 @@ font-weight: bold;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-haskell"><pre><span class="nf">minNat</span> <span class="n">two</span> <span class="n">three</span>
@@ -503,89 +364,18 @@ font-weight: bold;
 
 <div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea ">
-<style>/* Styles used for the Hoogle display in the pager */
-.hoogle-doc {
-display: block;
-padding-bottom: 1.3em;
-padding-left: 0.4em;
-}
-.hoogle-code {
-display: block;
-font-family: monospace;
-white-space: pre;
-}
-.hoogle-text {
-display: block;
-}
-.hoogle-name {
-color: green;
-font-weight: bold;
-}
-.hoogle-head {
-font-weight: bold;
-}
-.hoogle-sub {
-display: block;
-margin-left: 0.4em;
-}
-.hoogle-package {
-font-weight: bold;
-font-style: italic;
-}
-.hoogle-module {
-font-weight: bold;
-}
-.hoogle-class {
-font-weight: bold;
-}
-.get-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-display: block;
-white-space: pre-wrap;
-}
-.show-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-margin-left: 1em;
-}
-.mono {
-font-family: monospace;
-display: block;
-}
-.err-msg {
-color: red;
-font-style: italic;
-font-family: monospace;
-white-space: pre;
-display: block;
-}
-#unshowable {
-color: red;
-font-weight: bold;
-}
-.err-msg.in.collapse {
-padding-top: 0.7em;
-}
-.highlight-code {
-white-space: pre;
-font-family: monospace;
-}
-.suggestion-warning { 
-font-weight: bold;
-color: rgb(200, 130, 0);
-}
-.suggestion-error { 
-font-weight: bold;
-color: red;
-}
-.suggestion-name {
-font-weight: bold;
-}
-</style><span class='err-msg'>Prelude.undefined</span>
+
+<div class="output_text output_subarea ">
+<pre>S (S Z)</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>S (S Z)</pre>
 </div>
 
 </div>
@@ -596,12 +386,12 @@ font-weight: bold;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-haskell"><pre><span class="nf">plusList</span> <span class="kt">Nil</span>         <span class="n">ys</span>          <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">plusList</span> <span class="n">xs</span>          <span class="kt">Nil</span>         <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- induction base</span>
-<span class="nf">plusList</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="n">undefined</span> <span class="c1">-- inductive step</span>
+<div class=" highlight hl-haskell"><pre><span class="nf">plusList</span> <span class="kt">Nil</span>         <span class="n">ys</span>          <span class="ow">=</span> <span class="kt">Nil</span> <span class="c1">-- induction base</span>
+<span class="nf">plusList</span> <span class="n">xs</span>          <span class="kt">Nil</span>         <span class="ow">=</span> <span class="kt">Nil</span> <span class="c1">-- induction base</span>
+<span class="nf">plusList</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="p">(</span><span class="kt">Cons</span> <span class="n">y</span> <span class="n">ys</span><span class="p">)</span> <span class="ow">=</span> <span class="kt">Cons</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">plusList</span> <span class="n">xs</span> <span class="n">ys</span><span class="p">)</span><span class="c1">-- inductive step</span>
 </pre></div>
 
 </div>
@@ -611,7 +401,7 @@ font-weight: bold;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-haskell"><pre><span class="nf">plusList</span> <span class="n">list1</span> <span class="n">list2</span>
@@ -628,89 +418,18 @@ font-weight: bold;
 
 <div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea ">
-<style>/* Styles used for the Hoogle display in the pager */
-.hoogle-doc {
-display: block;
-padding-bottom: 1.3em;
-padding-left: 0.4em;
-}
-.hoogle-code {
-display: block;
-font-family: monospace;
-white-space: pre;
-}
-.hoogle-text {
-display: block;
-}
-.hoogle-name {
-color: green;
-font-weight: bold;
-}
-.hoogle-head {
-font-weight: bold;
-}
-.hoogle-sub {
-display: block;
-margin-left: 0.4em;
-}
-.hoogle-package {
-font-weight: bold;
-font-style: italic;
-}
-.hoogle-module {
-font-weight: bold;
-}
-.hoogle-class {
-font-weight: bold;
-}
-.get-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-display: block;
-white-space: pre-wrap;
-}
-.show-type {
-color: green;
-font-weight: bold;
-font-family: monospace;
-margin-left: 1em;
-}
-.mono {
-font-family: monospace;
-display: block;
-}
-.err-msg {
-color: red;
-font-style: italic;
-font-family: monospace;
-white-space: pre;
-display: block;
-}
-#unshowable {
-color: red;
-font-weight: bold;
-}
-.err-msg.in.collapse {
-padding-top: 0.7em;
-}
-.highlight-code {
-white-space: pre;
-font-family: monospace;
-}
-.suggestion-warning { 
-font-weight: bold;
-color: rgb(200, 130, 0);
-}
-.suggestion-error { 
-font-weight: bold;
-color: red;
-}
-.suggestion-name {
-font-weight: bold;
-}
-</style><span class='err-msg'>Prelude.undefined</span>
+
+<div class="output_text output_subarea ">
+<pre>Cons 4 (Cons 6 Nil)</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>Cons 4 (Cons 6 Nil)</pre>
 </div>
 
 </div>
