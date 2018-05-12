@@ -178,7 +178,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="&#51064;&#53552;&#54532;&#47532;&#53552;&#50752;-&#52980;&#54028;&#51068;&#47084;">&#51064;&#53552;&#54532;&#47532;&#53552;&#50752; &#52980;&#54028;&#51068;&#47084;<a class="anchor-link" href="#&#51064;&#53552;&#54532;&#47532;&#53552;&#50752;-&#52980;&#54028;&#51068;&#47084;">&#182;</a></h1><p>지금까지 알아본 프로그래밍 방식으로 정수의 사칙연산에서 나눗셈을 제외한 3칙 연산만 지원하는
 간단한 수식에 대한 인터프리터와 컴파일러를 만들어 볼 수 있다.</p>
-<p>실제 인터프리터나 컴파일러는 텍스트 문자열로 된 소스코드를 트리의 형태로 변환하는 문법분석(parsing)이 기본적으로 필요하지만 그것은 고학년에 프로그래밍 언어나 컴파일러 등을 다루는 전공과목 수업을 들을 경우 자세히 배울 수 있으므로 여기서는 이미 문법분석이 다 되어서 트리의 형태로 수식을 다룰 수 있다고 가정하자. 수식 타입을 이진트리 마찬가지 방식으로 아래와 같은 데이타 타입으로 정의할 수 있다. 수식을 보통 영어로 expression이라고 하므로 그 앞글자를 따서 타입의 이름을 <code>Exp</code>로 붙였다.</p>
+<p>실제 인터프리터나 컴파일러는 텍스트 문자열로 된 소스코드를 트리의 형태로 변환하는 문법분석(parsing)이 기본적으로 필요하지만 그것은 고학년에 프로그래밍 언어나 컴파일러 등을 다루는 전공과목 수업을 들을 경우 자세히 배울 수 있으므로 여기서는 이미 문법분석이 다 되어서 트리의 형태로 수식을 다룰 수 있다고 가정하자. 수식 타입을 이진트리와 마찬가지 방식으로 아래와 같은 데이타 타입으로 정의할 수 있다. 수식을 보통 영어로 expression이라고 하므로 그 앞글자를 따서 타입의 이름을 <code>Exp</code>로 붙였다.</p>
 
 </div>
 </div>
@@ -876,9 +876,319 @@ ADD</code></pre>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#52980;&#54028;&#51068;&#47084;-&#51221;&#51032;">&#52980;&#54028;&#51068;&#47084; &#51221;&#51032;<a class="anchor-link" href="#&#52980;&#54028;&#51068;&#47084;-&#51221;&#51032;">&#182;</a></h3><p>다음 시간에는 <code>Exp</code> 타입의 소스 프로그램을 받아 자동으로 목적 <code>Code</code>를 생성하는 컴파일 함수를 정의해 보겠다.</p>
+<p>우선 컴파일러를 정의하기 전에 컴파일러를 정의하는 데 쓸 <code>(++)</code> 연산자에 대한 기억을 되살려 보자. 우리가 직접 정의해 사용하던 <code>List</code>에 대한 함수들 중 두 리스트를 이어붙이는 <code>append</code>라는 함수를 정의했고 이 함수는 <code>Nat</code> 타입의 일진수 자연수의 덧셈과 같은 구조를 갖고 있다는 것이 기억나는가? (안난다면 복습을 ...) 하스켈 표준라이브러리에서 제공하는 리스트에 대해 <code>append</code> 함수와 같은 역할을 하는 연산자가 바로 <code>(++)</code>이다. 일단 하스켈 표준라이브러리 리스트는 (<code>:</code>)가 우리가 직접 만들어 쓰던 <code>List</code>의 <code>Cons</code>에 해당한다. 즉 <code>(:)</code>로 다음과 같이 리스트 맨 앞에 원소를 하나 추가할 수 있다.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="mi">1</span> <span class="kt">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[1,2,3]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>그리고 <code>(++)</code>로 두 리스트를 다음과 같이 이어붙일 수 있다.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[2,3,4,5]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>리스트의 맨 뒤에 원소를 추가할 때도 <code>(++)</code> 연산자를 이용할 수 있다. 맨 끝에다 넣을 원소 하나만 들어 있는 리스트를 뒤에다 이어붙이면 된다.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">++</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[2,3,1]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>리스트를 이어붙이는 <code>(++)</code> 연산자 뭔지 이제 기억이 났을 것이다. 혹시 기억이 안나더라도 뭐하는 연산자인지 감을 잡았을 것이다.</p>
+<p>이제 compile 함수를 정의하자. 컴파일러는 <code>Exp</code> 타입의 소스 프로그램을 받아 목적 <code>Code</code>를 돌려주는 함수이다. 여기서 <code>Code</code>는 명령어가 일렬로 죽 나열된 리스트, 즉 <code>[Inst]</code> 타입을 나타낸다고 앞서 선언했었다. compile 함수의 정의는 다음과 같다.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">compile</span> <span class="ow">::</span> <span class="kt">Exp</span> <span class="ow">-&gt;</span> <span class="kt">Code</span>       <span class="c1">-- Code = [Inst]</span>
+<span class="nf">compile</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">n</span><span class="p">)</span>       <span class="ow">=</span> <span class="p">[</span><span class="kt">PUSH</span> <span class="n">n</span><span class="p">]</span>
+<span class="nf">compile</span> <span class="p">(</span><span class="kt">Plus</span>  <span class="n">e1</span> <span class="n">e2</span><span class="p">)</span> <span class="ow">=</span> <span class="n">compile</span> <span class="n">e1</span> <span class="o">++</span> <span class="n">compile</span> <span class="n">e2</span> <span class="o">++</span> <span class="p">[</span><span class="kt">ADD</span><span class="p">]</span>
+<span class="nf">compile</span> <span class="p">(</span><span class="kt">Minus</span> <span class="n">e1</span> <span class="n">e2</span><span class="p">)</span> <span class="ow">=</span> <span class="n">compile</span> <span class="n">e1</span> <span class="o">++</span> <span class="n">compile</span> <span class="n">e2</span> <span class="o">++</span> <span class="p">[</span><span class="kt">SUB</span><span class="p">]</span>
+<span class="nf">compile</span> <span class="p">(</span><span class="kt">Times</span> <span class="n">e1</span> <span class="n">e2</span><span class="p">)</span> <span class="ow">=</span> <span class="n">compile</span> <span class="n">e1</span> <span class="o">++</span> <span class="n">compile</span> <span class="n">e2</span> <span class="o">++</span> <span class="p">[</span><span class="kt">MUL</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">compile</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[PUSH 3]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">compile</span> <span class="p">(</span><span class="kt">Plus</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[PUSH 3,PUSH 3,ADD]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">runVM</span> <span class="kt">[]</span> <span class="p">[</span><span class="kt">PUSH</span> <span class="mi">3</span><span class="p">,</span><span class="kt">PUSH</span> <span class="mi">3</span><span class="p">,</span><span class="kt">ADD</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[6]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">compile</span> <span class="p">(</span><span class="kt">Plus</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Minus</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">5</span><span class="p">)</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[PUSH 3,PUSH 5,PUSH 2,SUB,ADD]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">eval</span> <span class="p">(</span><span class="kt">Plus</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="kt">Minus</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">5</span><span class="p">)</span> <span class="p">(</span><span class="kt">Num</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>6</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-haskell"><pre><span class="nf">runVM</span> <span class="kt">[]</span> <span class="p">[</span><span class="kt">PUSH</span> <span class="mi">3</span><span class="p">,</span><span class="kt">PUSH</span> <span class="mi">5</span><span class="p">,</span><span class="kt">PUSH</span> <span class="mi">2</span><span class="p">,</span><span class="kt">SUB</span><span class="p">,</span><span class="kt">ADD</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_text output_subarea ">
+<pre>[6]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
